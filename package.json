@@ -1,0 +1,23 @@
+{
+  "name": "incrementalreading",
+  "version": "1.0.0",
+  "description": "incremental reading software",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asonskii/incrementalreading.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asonskii/incrementalreading/issues"
+  },
+  "homepage": "https://github.com/asonskii/incrementalreading#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongojs": "^2.4.0"
+  }
+}
