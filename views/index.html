@@ -1,5 +1,6 @@
 <html ng-app="indexApp">
   <head>
+    <title>Incremental Reading</title>
     <link rel="stylesheet" href="static/css/index.css">
   </head>
 
@@ -8,6 +9,7 @@
     <nav class="navbar" ng-controller="navCtrl">
       <p class="titleBar" ng-bind="title"></p>
       <a href="#"><div id="nextButton"><p>Next Article</p></div></a>
+      <p id="webSource" ng-bind="source"></p>
     </nav>
 
     <div class="main">
@@ -19,7 +21,7 @@
 
     <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
-    <script src="static/js/index.js"></script>
+    <script src="static/js/indexApp.js"></script>
   </body>
 
 </html>

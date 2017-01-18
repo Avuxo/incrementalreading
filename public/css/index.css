@@ -47,3 +47,17 @@ time, mark, audio, video {
     font-size: 25px;
     color: #ECEFF1;
 }
+
+
+#webSource{
+    color: #90A4AE;
+    position: absolute;
+    top: 55px;
+    left: 1%;
+}
+
+.main{
+    background-color: #ECEFF1;
+    height: 100%;
+    width: 100%;
+}

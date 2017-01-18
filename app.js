@@ -27,7 +27,7 @@ app.get('/', function(req, res){
 
 //GET request for article
 app.get('/article', function(req, res){
-    res.send({title:'title'});
+    res.send({title:'title', source: 'website.com'});
 })
 
 app.listen(8080, function(){
