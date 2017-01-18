@@ -1,12 +1,12 @@
-<html>
+<html ng-app="indexApp">
   <head>
     <link rel="stylesheet" href="static/css/index.css">
   </head>
 
   <body>
     
-    <nav class="navbar">
-      <p class="titleBar">Title</p>
+    <nav class="navbar" ng-controller="navCtrl">
+      <p class="titleBar">{{test}}</p>
       <div id="nextButton">Next Article</div>
     </nav>
 
@@ -16,7 +16,9 @@
         
       </div>
     </div>
-    
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
     <script src="static/js/index.js"></script>
   </body>
 
