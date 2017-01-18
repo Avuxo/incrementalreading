@@ -20,7 +20,6 @@ time, mark, audio, video {
 
 }
 
-
 .navbar{
     text-align: center;
     width: 100%;
@@ -38,7 +37,9 @@ time, mark, audio, video {
     left: 85%;
     position: absolute;
     color: #ECEFF1;
+    text-decoration:none;
 }
+
 
 .titleBar{
     text-align:center;
