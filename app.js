@@ -1,16 +1,21 @@
 /*------------
   DEPENDENCIES
   ------------*/
-const express = require('express');
-const mongojs = require('mongojs');
+const express   = require('express');
+const mongojs   = require('mongojs');
+const extractor = require('article-extractor');
 
 /*--------------
   INITIALIZATION
   --------------*/
 
 const app = express();
-var db = mongojs('https://localhost:27017/test', ['users']);
+const db  = mongojs('https://localhost:27017/test', ['users']); 
 
+
+/*-----
+  SETUP
+  -----*/
 
 app.use('/static', express.static(__dirname + '/public'));
 
@@ -24,16 +29,22 @@ app.get('/', function(req, res){
 });
 
 
+var articleTest = {
+    title  : 'title',
+    source : 'website.com'
+}
 
 //GET request for article
 app.get('/article', function(req, res){
-    res.send({title:'title', source: 'website.com'});
-})
+    //TESING WEBPAGE
+    extractor.extractData('https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/', function(err, data){
+        res.send(data);
+    })
+});
 
 app.listen(8080, function(){
     console.log('App running on port 8080');
 });
-
 
 
 
