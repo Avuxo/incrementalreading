@@ -28,19 +28,29 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/add', function(req, res){
+    res.sendFile(__dirname + '/views/add.html');
+});
 
-var articleTest = {
-    title  : 'title',
-    source : 'website.com'
-}
+var webpages = ['https://krebsonsecurity.com/2014/05/antivirus-is-dead-\
+long-live-antivirus/']
 
 //GET request for article
 app.get('/article', function(req, res){
     //TESING WEBPAGE
-    extractor.extractData('https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/', function(err, data){
+    extractor.extractData(webpages[0], function(err, data){
         res.send(data);
     })
 });
+
+/*-------------
+  POST REQUESTS
+  -------------*/
+
+app.post('/postArticle', function(req, res){
+    console.log(req.body);
+});
+
 
 app.listen(8080, function(){
     console.log('App running on port 8080');
