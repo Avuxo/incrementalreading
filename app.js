@@ -10,7 +10,7 @@ const extractor = require('article-extractor');
   --------------*/
 
 const app = express();
-const db  = mongojs('https://localhost:27017/test', ['users']); 
+const db  = mongojs('localhost:27017/test', ['users', 'articles']); 
 
 
 /*-----
@@ -38,9 +38,8 @@ long-live-antivirus/']
 //GET request for article
 app.get('/article', function(req, res){
     //TESING WEBPAGE
-    extractor.extractData(webpages[0], function(err, data){
-        res.send(data);
-    })
+    //res.send(getArticle(0))
+    console.log(req);
 });
 
 /*-------------
@@ -58,5 +57,21 @@ app.listen(8080, function(){
 
 
 
+/*----------------
+  DB communication
+  ----------------*/
 
+//send the article to the db
+function uploadArticle(url){
+    extractor.extractData(url, function(err, data){
+        db.articles.insert(data);
+    });
+}
+
+function getArticle(index){
+    db.articles.find(function(err, docs){
+        console.log(docs[index]);
+        return(docs[index]);
+    });
+}
 
