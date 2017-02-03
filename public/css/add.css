@@ -1,0 +1,13 @@
+.packageList{
+    width: 500px;
+    height: 200px;
+    overflow-y: scroll;
+    position: absolute;
+    top: 15%;
+    left: 100px;
+}
+.addForm{
+    position: absolute;
+    left: 200px;
+    top: 10%;
+}

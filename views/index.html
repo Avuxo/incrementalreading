@@ -8,7 +8,7 @@
     
     <nav class="navbar" ng-controller="navCtrl">
       <p class="titleBar" ng-bind="title"></p>
-      <a href="#"><div id="nextButton"><p>Next Article</p></div></a>
+      <a ng-controller="articleCtrl" href="#" ng-click="getArticle()"><div id="nextButton"><p>Next Article</p></div></a>
       <p id="webSource" ng-bind="source"></p>
     </nav>
 

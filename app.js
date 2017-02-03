@@ -4,6 +4,8 @@
 const express   = require('express');
 const mongojs   = require('mongojs');
 const extractor = require('article-extractor');
+const bodyParser = require("body-parser");
+const http = require('http');
 
 /*--------------
   INITIALIZATION
@@ -18,6 +20,13 @@ const db  = mongojs('localhost:27017/test', ['users', 'articles']);
   -----*/
 
 app.use('/static', express.static(__dirname + '/public'));
+
+//set body-parser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+
 
 /*---------
   WEB PAGES
@@ -38,16 +47,18 @@ long-live-antivirus/']
 //GET request for article
 app.get('/article', function(req, res){
     //TESING WEBPAGE
-    //res.send(getArticle(0))
-    console.log(req);
+    db.articles.find(function(err,docs){
+        res.send(docs[1]);
+    });
 });
 
 /*-------------
   POST REQUESTS
   -------------*/
 
+//user submits articles from add.html here
 app.post('/postArticle', function(req, res){
-    console.log(req.body);
+    uploadArticle(req.body.link);
 });
 
 
@@ -56,22 +67,37 @@ app.listen(8080, function(){
 });
 
 
-
 /*----------------
   DB communication
   ----------------*/
 
-//send the article to the db
-function uploadArticle(url){
-    extractor.extractData(url, function(err, data){
-        db.articles.insert(data);
+function getArticle(index){
+    var num = Math.floor(Math.random() * 3);
+    db.articles.find(function(err, docs){
+        return docs[num];
     });
 }
 
-function getArticle(index){
-    db.articles.find(function(err, docs){
-        console.log(docs[index]);
-        return(docs[index]);
+
+//send the article to the db
+function uploadArticle(url){
+    extractor.extractData(url, function(err, data){
+        db.articles.find({"title": data.title}, function(err, docs){
+            
+        });
+        //db.articles.insert(data);
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
