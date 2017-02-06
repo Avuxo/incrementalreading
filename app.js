@@ -2,17 +2,19 @@
   DEPENDENCIES
   ------------*/
 const express   = require('express');
-const mongojs   = require('mongojs');
+//const mongojs   = require('mongojs');
 const extractor = require('article-extractor');
 const bodyParser = require("body-parser");
 const http = require('http');
+
+const bendb = require('./db.js');
 
 /*--------------
   INITIALIZATION
   --------------*/
 
 const app = express();
-const db  = mongojs('localhost:27017/test', ['users', 'articles']); 
+//const db  = mongojs('localhost:27017/test', ['users', 'articles']); 
 
 
 /*-----
@@ -66,7 +68,6 @@ app.listen(8080, function(){
     console.log('App running on port 8080');
 });
 
-
 /*----------------
   DB communication
   ----------------*/
@@ -77,6 +78,7 @@ function getArticle(index){
         return docs[num];
     });
 }
+
 
 
 //send the article to the db

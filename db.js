@@ -19,7 +19,7 @@ const path = './db/db.json'
 var db = require(path);
 
 app.listen(8090, function(){
-    console.log('App running on port 8090');
+    console.log('DB running on port 8090');
 });
 
 //get user input
@@ -35,12 +35,17 @@ rl.on('line', function(input){
   write the version of the db from memory back into db.json
 */
 function writeData(){
-    console.log("writing to db")
+    console.log("writing to db");
+    console.log(queryData("ayy"));
     jsonfile.writeFile(path, db, function(err){
         console.log(err);
     });
 }
 
+/*
+  QueryData
+  find data with the given key
+*/
 
 
 

@@ -1,1 +1,6 @@
-{"test":"test","ayy":"lmao"}
+{"db":
+ [
+        {"test":"test","ayy":"lmao"},
+        {"new" : "object 2"},
+ ]
+}
