@@ -7,8 +7,6 @@ const extractor = require('article-extractor');
 const bodyParser = require("body-parser");
 const http = require('http');
 
-const bendb = require('./db.js');
-
 /*--------------
   INITIALIZATION
   --------------*/
@@ -74,9 +72,7 @@ app.listen(8080, function(){
 
 function getArticle(index){
     var num = Math.floor(Math.random() * 3);
-    db.articles.find(function(err, docs){
-        return docs[num];
-    });
+    
 }
 
 

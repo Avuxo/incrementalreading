@@ -1,6 +1,6 @@
-/*
+/*------------
   DEPENDENCIES
-              */
+  ------------*/
 const express = require('express');
 const fs = require('fs');
 const jsonfile = require('jsonfile');
@@ -18,6 +18,16 @@ const path = './db/db.json';
 
 //load the json file into memory
 var db = jsonfile.readFileSync(path);
+
+//get DB
+app.get('/fullDB', function(req, res){
+    res.send(db);
+});
+
+//query specific data from the DB
+app.get('/query', function(req, res){
+    res.send(queryData(req));
+});
 
 app.listen(8090, function(){
     console.log('DB running on port 8090');
@@ -39,27 +49,15 @@ rl.on('line', function(input){
   WriteData
   write the version of the db from memory back into db.json
 */
+
+
 function writeData(){
     console.log("writing to db");
-    //console.log(queryData("ayy"));
     jsonfile.writeFile(path, db, function(err){
         console.log(err);
     });
 }
 
-/*
-  QueryData
-  find data with the given key
-*/
 
-function queryData(query){
-    for(var i=0; i<db.db.length; i++){
-        for(var j=0; j<db.db[i].length; j++){
-            if(db.db[i].ye == query){
-                return db.db[i][j];
-            }
-        }
-    }
-}
 
 
