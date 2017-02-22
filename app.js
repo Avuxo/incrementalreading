@@ -2,18 +2,21 @@
   DEPENDENCIES
   ------------*/
 const express   = require('express');
-//const mongojs   = require('mongojs');
 const extractor = require('article-extractor');
 const bodyParser = require("body-parser");
 const http = require('http');
+const jsonfile = require('jsonfile');
+const fs = require('fs');
 
 /*--------------
   INITIALIZATION
   --------------*/
-
+//setup for express app
 const app = express();
-//const db  = mongojs('localhost:27017/test', ['users', 'articles']); 
 
+//setup for basic json DB
+const path = "./db/db.json";
+var db = jsonfile.readFileSync(path);
 
 /*-----
   SETUP
@@ -41,8 +44,7 @@ app.get('/add', function(req, res){
     res.sendFile(__dirname + '/views/add.html');
 });
 
-var webpages = ['https://krebsonsecurity.com/2014/05/antivirus-is-dead-\
-long-live-antivirus/']
+const testPage = 'https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-live-antivirus/'
 
 //GET request for article
 app.get('/article', function(req, res){
@@ -61,7 +63,6 @@ app.post('/postArticle', function(req, res){
     uploadArticle(req.body.link);
 });
 
-
 app.listen(8080, function(){
     console.log('App running on port 8080');
 });
@@ -71,20 +72,37 @@ app.listen(8080, function(){
   ----------------*/
 
 function getArticle(index){
+    //just pseudo-random number gen for testing article picking.
     var num = Math.floor(Math.random() * 3);
-    
 }
 
+function appendArticle(data){
+    var newArticle = {
+        "tag" : db.db.length,
+        "article" : data
+    }
+    db.db.push(newArticle)
+}
 
+function query(tag){
+    for(var i=0; i<db.db.length; i++){
+        if(db.db[i].tag == tag){
+            console.log(db.db[i].article);
+            return db.db[i].article;
+        }
+    }
+}
+
+function writeDBToFile(){
+    console.log("*Writing To File*");
+    jsonfile.writeFile(path, db, function(err){
+        console.log(err);
+    });
+}
 
 //send the article to the db
 function uploadArticle(url){
-    extractor.extractData(url, function(err, data){
-        db.articles.find({"title": data.title}, function(err, docs){
-            
-        });
-        //db.articles.insert(data);
-    });
+    
 }
 
 
