@@ -1,8 +1,9 @@
 - database
-* reading from database
-* writing to database
+X* reading from database
+X* writing to database
 
 - articles
+X* posting articles to database
 * parsing articles (sticking stuff in them like anchors)
 * getting the next article
 

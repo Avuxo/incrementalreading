@@ -14,17 +14,15 @@ app.controller("navCtrl", function($scope, $http){
 });
 
 app.controller("articleCtrl", function($scope, $http){
-    $scope.getArticle = function(){
-        $http({method: 'GET', url: '/article'})
-            .then(function(res){ //GET success
-                if(typeof res.data.content != 'undefined'){
-                    $scope.articleBody = res.data.content; //this is just LOOKING for XSS
-                    document.getElementById('article').innerHTML = $scope.articleBody;
-                }else{
-                    console.log("Failed to obtain article, returned 'undefined'");
-                }
-            },function(res){ //GET failure
-                console.log('Failure to obtain article');
-            });
-    }
+    $http({method: 'GET', url: '/article'})
+        .then(function(res){ //GET success
+            if(typeof res.data.content != 'undefined'){
+                $scope.articleBody = res.data.content; //this is just LOOKING for XSS
+                document.getElementById('article').innerHTML = $scope.articleBody;
+            }else{
+                console.log("Failed to obtain article, returned 'undefined'");
+            }
+        },function(res){ //GET failure
+            console.log('Failure to obtain article');
+        });
 });
