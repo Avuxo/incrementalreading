@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const http = require('http');
 const jsonfile = require('jsonfile');
 const fs = require('fs');
+const colors = require('colors');
 
 /*--------------
   INITIALIZATION
@@ -50,7 +51,6 @@ const testPage = 'https://krebsonsecurity.com/2014/05/antivirus-is-dead-long-liv
 app.get('/article', function(req, res){
     //TESING WEBPAGE
     var articleNum = db.currentArticle; //get the currently queued article
-    console.log(query(articleNum));
     res.send(query(articleNum));
 });
 
@@ -88,7 +88,7 @@ function addArticle(content, title){
 function query(tag){
     for(var i=0; i<db.db.length; i++){
         if(db.db[i].tag == tag){
-            console.log("querried: " + db.db[i].article);
+            console.log(colors.blue("database querried"));
             return db.db[i]; // removed .article
         }
     }
@@ -96,9 +96,9 @@ function query(tag){
 
 //save the DB based on the one in memory
 function writeDBToFile(){
-    console.log("*Writing To File*");
+    console.log(colors.red("*Writing To File*"));
     jsonfile.writeFile(path, db, function(err){
-        console.log(err);
+        console.log(colors.red(err));
     });
 }
 
