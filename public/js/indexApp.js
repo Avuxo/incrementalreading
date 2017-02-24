@@ -3,6 +3,7 @@ var app = angular.module("indexApp", []);
 app.controller("navCtrl", function($scope, $http){
     $http({method: 'GET', url: '/article'})
         .then(function(res){ //GET success
+            console.log(res.data);
             $scope.title = res.data.title;
             $scope.source = res.data.domain;
         },function(res){ //GET failure

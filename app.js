@@ -75,11 +75,12 @@ app.listen(8080, function(){
 setInterval(writeDBToFile, 399000);
 
 //write articles to the database
-function addArticle(content, title){
+function addArticle(content, title, domain){
     var newArticle = {
         "tag" : db.db.length,
         "article" : content,
-        "title" : title
+        "title" : title,
+        "domain": domain
     }
     db.db.push(newArticle)
 }
@@ -112,7 +113,7 @@ function uploadArticle(url){
           data.summary: article summary
           data.author : article author
         */
-        addArticle(data.content, data.title);
+        addArticle(data.content, data.title, data.domain);
     });
 }
 
