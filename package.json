@@ -19,6 +19,7 @@
   "dependencies": {
     "article-extractor": "^1.0.2",
     "body-parser": "^1.16.0",
+    "colors": "^1.1.2",
     "express": "^4.14.0",
     "jsonfile": "^2.4.0",
     "middleware": "^1.0.0",
