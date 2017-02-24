@@ -17,7 +17,7 @@ app.controller("articleCtrl", function($scope, $http){
     $http({method: 'GET', url: '/article'})
         .then(function(res){ //GET success
             if(typeof res.data.content != 'undefined'){
-                $scope.articleBody = res.data.content; //this is just LOOKING for XSS
+                $scope.articleBody = res.data.article; //this is just LOOKING for XSS
                 document.getElementById('article').innerHTML = $scope.articleBody;
             }else{
                 console.log("Failed to obtain article, returned 'undefined'");

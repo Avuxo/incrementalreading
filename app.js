@@ -75,10 +75,11 @@ app.listen(8080, function(){
 setInterval(writeDBToFile, 399000);
 
 //write articles to the database
-function addArticle(data){
+function addArticle(content, title){
     var newArticle = {
         "tag" : db.db.length,
-        "article" : data
+        "article" : content,
+        "title" : title
     }
     db.db.push(newArticle)
 }
@@ -88,7 +89,7 @@ function query(tag){
     for(var i=0; i<db.db.length; i++){
         if(db.db[i].tag == tag){
             console.log("querried: " + db.db[i].article);
-            return db.db[i].article;
+            return db.db[i]; // removed .article
         }
     }
 }
@@ -111,7 +112,7 @@ function uploadArticle(url){
           data.summary: article summary
           data.author : article author
         */
-        addArticle(data.content);
+        addArticle(data.content, data.title);
     });
 }
 
