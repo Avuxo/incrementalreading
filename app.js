@@ -139,5 +139,3 @@ function addAnchors(text){
     var newString = text.replace(/<p>/g, "<p class='anchor'>" );
     return newString;
 }
-
-//replace all instances of a string
