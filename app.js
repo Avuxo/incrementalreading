@@ -8,6 +8,7 @@ const http = require('http');
 const jsonfile = require('jsonfile');
 const fs = require('fs');
 const colors = require('colors');
+const readline = require('readline');
 
 /*--------------
   INITIALIZATION
@@ -15,9 +16,25 @@ const colors = require('colors');
 //setup for express app
 const app = express();
 
+const rl = readline.createInterface({
+    input : process.stdin,
+    output : process.stdout
+});
+
 //setup for basic json DB
 const path = "./db/db.json";
 var db = jsonfile.readFileSync(path);
+
+/*---
+  CLI
+  ---*/
+
+rl.on('line', function(input){
+    if(input == "write"){
+        writeDBToFile();
+    }
+});
+
 
 /*-----
   SETUP
@@ -97,9 +114,9 @@ function query(tag){
 
 //save the DB based on the one in memory
 function writeDBToFile(){
-    console.log(colors.red("*Writing To File*"));
+    console.log(colors.yellow("*Writing To File*"));
     jsonfile.writeFile(path, db, function(err){
-        console.log(colors.red(err));
+        console.log(colors.red("db error: " + err));
     });
 }
 
@@ -113,19 +130,14 @@ function uploadArticle(url){
           data.summary: article summary
           data.author : article author
         */
-        addArticle(data.content, data.title, data.domain);
+        addArticle(addAnchors(data.content), data.title, data.domain);
     });
 }
 
+//add anchors into the articles so it can jump back to the current position
+function addAnchors(text){
+    var newString = text.replace(/<p>/g, "<p class='anchor'>" );
+    return newString;
+}
 
-
-
-
-
-
-
-
-
-
-
-
+//replace all instances of a string

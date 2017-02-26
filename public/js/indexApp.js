@@ -11,12 +11,19 @@ app.controller("navCtrl", function($scope, $http){
         });
 });
 
-app.controller("articleCtrl", function($scope, $http){
+app.controller("articleCtrl", function($scope, $http, $anchorScroll, $location){
     $http({method: 'GET', url: '/article'})
         .then(function(res){ //GET success
             if(typeof res.data.article != 'undefined'){
                 $scope.articleBody = res.data.article; //this is just LOOKING for XSS
                 document.getElementById('article').innerHTML = $scope.articleBody;
+                var classes = document.getElementsByClassName("anchor");
+                for(var i=0; i<classes.length; i++){
+                    document.getElementsByClassName("anchor")[i].className = "anchor" + i;
+                }
+                $scope.goToAnchor = function(pos){
+                    $location.hash(pos);
+                }
             }else{
                 console.log("Failed to obtain article, returned 'undefined'");
             }
