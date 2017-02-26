@@ -32,6 +32,8 @@ var db = jsonfile.readFileSync(path);
 rl.on('line', function(input){
     if(input == "write"){
         writeDBToFile();
+    }else if(input == "back"){
+        db.currentArticle -= 1;
     }
 });
 
@@ -80,6 +82,13 @@ app.post('/postArticle', function(req, res){
     uploadArticle(req.body.link);
 });
 
+app.post('/next', function(req, res){
+    console.log("position: " + req.body.pos);
+    setArticlePos(db.currentArticle, req.body.pos);
+    nextArticleQueue();
+});
+
+
 app.listen(8080, function(){
     console.log('App running on port 8080');
 });
@@ -91,13 +100,19 @@ app.listen(8080, function(){
 //autosave DB
 setInterval(writeDBToFile, 399000);
 
+function setArticlePos(index, pos){
+    db.db[index].position = pos;
+}
+
+
 //write articles to the database
 function addArticle(content, title, domain){
     var newArticle = {
         "tag" : db.db.length,
         "article" : content,
         "title" : title,
-        "domain": domain
+        "domain": domain,
+        "position": 0
     }
     db.db.push(newArticle)
 }
@@ -133,9 +148,15 @@ function uploadArticle(url){
         addArticle(addAnchors(data.content), data.title, data.domain);
     });
 }
-
+/*
 //add anchors into the articles so it can jump back to the current position
 function addAnchors(text){
     var newString = text.replace(/<p>/g, "<p class='anchor'>" );
     return newString;
+}
+*/
+
+//change the article queue counter
+function nextArticleQueue(){
+    db.currentArticle = db.currentArticle + 1;
 }
