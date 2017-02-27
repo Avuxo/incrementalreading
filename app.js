@@ -149,7 +149,7 @@ function uploadArticle(url){
           data.summary: article summary
           data.author : article author
         */
-        addArticle(addAnchors(data.content), data.title, data.domain);
+        addArticle(data.content, data.title, data.domain);
     });
 }
 
