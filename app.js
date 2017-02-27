@@ -34,6 +34,8 @@ rl.on('line', function(input){
         writeDBToFile();
     }else if(input == "back"){
         db.currentArticle -= 1;
+    }else if(input == "position"){
+        console.log(db.db[db.currentArticle].position);
     }
 });
 
@@ -98,10 +100,12 @@ app.listen(8080, function(){
   ----------------*/
 
 //autosave DB
-setInterval(writeDBToFile, 399000);
+setInterval(writeDBToFile, 100000);
 
 function setArticlePos(index, pos){
+    if(db.currentArticle + 1 > db.db.length) return;
     db.db[index].position = pos;
+    console.log(pos);
 }
 
 
@@ -148,15 +152,14 @@ function uploadArticle(url){
         addArticle(addAnchors(data.content), data.title, data.domain);
     });
 }
-/*
-//add anchors into the articles so it can jump back to the current position
-function addAnchors(text){
-    var newString = text.replace(/<p>/g, "<p class='anchor'>" );
-    return newString;
-}
-*/
 
 //change the article queue counter
 function nextArticleQueue(){
-    db.currentArticle = db.currentArticle + 1;
+    console.log("length:"+  db.db.length);
+    console.log("current article: " + db.currentArticle);
+    if(db.currentArticle + 1 < db.db.length){
+        db.currentArticle = db.currentArticle + 1;
+    }else{
+        db.currentArticle = 0;
+    }
 }
