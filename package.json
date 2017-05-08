@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/asonskii/incrementalreading.git"
+    "url": "git+https://github.com/avuxoincrementalreading.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/asonskii/incrementalreading/issues"
+    "url": "https://github.com/avuxo/incrementalreading/issues"
   },
-  "homepage": "https://github.com/asonskii/incrementalreading#readme",
+  "homepage": "https://github.com/avuxo/incrementalreading#readme",
   "dependencies": {
     "article-extractor": "^1.0.2",
     "body-parser": "^1.16.0",
