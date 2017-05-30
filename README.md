@@ -1,5 +1,5 @@
 # incremental reading
-An incremental reading solution written using NodeJS, MongoJS and Express
+An incremental reading solution written using NodeJS, Angular, and Express
 
 ## Installing
 First, clone the repository and run `$ npm install`.
