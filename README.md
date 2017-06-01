@@ -1,4 +1,4 @@
-# incremental reading
+# Incremental Reading
 An incremental reading solution written using NodeJS, Angular, and Express
 
 ## Installing
